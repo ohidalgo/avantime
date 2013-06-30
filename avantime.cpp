@@ -10,7 +10,9 @@ char *Texto;
 SFont_Font* sFont;
 	
 SDL_Rect textrect;	
+SDL_Rect sfontrect;
 bool textohide=true;
+bool sfonthide=true;
 
 void onkeys(SDL_KeyboardEvent key) {
   switch(key.keysym.sym) {
@@ -30,7 +32,9 @@ void onkeys(SDL_KeyboardEvent key) {
   	   textohide = false;
        break;
   case SDLK_c:
-       break;
+		sfontrect.y = rand() % (v_screenh - SFont_TextHeight(sFont));
+  	   	sfonthide = false;
+       	break;
   }
 }
       	
@@ -57,7 +61,7 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-sFont = SFont_InitFont(IMG_Load("24P_Copperplate_Blue.png"));
+sFont = SFont_InitFont(IMG_Load("avantime_TextSFont.NeonYellow.png"));
 if(!sFont) {
 		fprintf(stderr, "An error occured while loading the font.");
 		exit(1);
@@ -168,7 +172,9 @@ TTF_Font *font = loadfont("arial.ttf", 30);
 int color=0;
 Texto = "Texto de Prueba";
 textrect.x = 0;
-textrect.y = 200;
+textrect.y = rand() % (v_screenh - 100);
+sfontrect.x = 0;
+sfontrect.y = rand() % (v_screenh - SFont_TextHeight(sFont));
 
 
     //Bucle Principal           
@@ -196,15 +202,33 @@ textrect.y = 200;
 		
 		//Dibujamos Texto ttf
 		if (textohide==false) {
-			if (textrect.x <= v_screenw) textrect.x++; 
-			else { textrect.x = 0; textohide = true;}
-            if (color <=254) fColor.r = fColor.g = fColor.b = color++; else color=0;
-		    text_surface = TTF_RenderText_Solid( font , Texto, fColor );
-		    SDL_BlitSurface(text_surface, NULL, screen, &textrect);
+			if (textrect.x <= v_screenw) {
+				if (color <=254) fColor.r = fColor.g = fColor.b = color++; else color=0;
+		    	text_surface = TTF_RenderText_Solid( font , Texto, fColor );
+		    	SDL_BlitSurface(text_surface, NULL, screen, &textrect);
+				textrect.x++;
+			}
+			else {
+				textrect.x = 0; 
+				textohide = true;
+			}
+            
 		}
 		
 		//Dibujamos Texto Sfont
-			SFont_Write (screen, sFont, 200,200,"Texto sFont!");
+		if (sfonthide==false) {
+			if (sfontrect.x <= v_screenw) {
+				SFont_Write (screen, sFont, sfontrect.x,sfontrect.y,"Texto sFont!");
+				sfontrect.x++;
+			}
+			else { 
+				sfontrect.x = 0; 
+				sfonthide = true;
+			}
+		}
+		
+
+
 
 		// Update the screen SDL_UpdateRect(screen, 0, 0, 0, 0);
 
