@@ -7,6 +7,7 @@ Object LetraQ;
 SDL_Surface *text_surface;
 SDL_Color fColor ;
 char *Texto;
+SFont_Font* sFont;
 	
 SDL_Rect textrect;	
 bool textohide=true;
@@ -56,7 +57,6 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-SFont_Font* sFont;
 sFont = SFont_InitFont(IMG_Load("24P_Copperplate_Blue.png"));
 if(!sFont) {
 		fprintf(stderr, "An error occured while loading the font.");
@@ -203,6 +203,13 @@ textrect.y = 200;
 		    SDL_BlitSurface(text_surface, NULL, screen, &textrect);
 		}
 		
+		//Dibujamos Texto Sfont
+			SFont_Write (screen, sFont, 200,200,"Texto sFont!");
+
+		// Update the screen SDL_UpdateRect(screen, 0, 0, 0, 0);
+
+		//SDL_Delay(4000);
+	
 		//Actualizamos la pantalla
         SDL_Flip(screen); 
 		
@@ -233,5 +240,6 @@ textrect.y = 200;
     Mix_CloseAudio();
     SDL_Quit();
     SDL_FreeSurface(text_surface);
+	SFont_FreeFont(sFont);
 	return 0;
 	}
