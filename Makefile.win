@@ -1,17 +1,17 @@
-# Project: avantime
+# Project: sfont
 # Makefile created by Dev-C++ 5.4.1
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = avantime.o
-LINKOBJ  = avantime.o
-LIBS     = -L"D:/_MyArchives/avantime/Dev-Cpp.5.4.1.MinGW.4.7.2x32.Pe/MinGW32/lib" -static-libstdc++ -static-libgcc -lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_mixer -mwindows -lSDL_ttf -lSDL_net -g3
-INCS     = -I"D:/_MyArchives/avantime/Dev-Cpp.5.4.1.MinGW.4.7.2x32.Pe/MinGW32/include"
-CXXINCS  = -I"D:/_MyArchives/avantime/Dev-Cpp.5.4.1.MinGW.4.7.2x32.Pe/MinGW32/include"
-BIN      = avantime.exe
-CXXFLAGS = $(CXXINCS) -g3
-CFLAGS   = $(INCS) -g3
+OBJ      = SFont.o
+LINKOBJ  = SFont.o
+LIBS     = -L"H:/_MyArchives/Avantime/Dev-Cpp.5.4.1.MinGW.4.7.2x32.Pe/MinGW32/lib" -static-libstdc++ -static-libgcc -lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_mixer -mwindows -lSDL_ttf -lSDL_net
+INCS     = -I"H:/_MyArchives/Avantime/Dev-Cpp.5.4.1.MinGW.4.7.2x32.Pe/MinGW32/include"
+CXXINCS  = -I"H:/_MyArchives/Avantime/Dev-Cpp.5.4.1.MinGW.4.7.2x32.Pe/MinGW32/include"
+BIN      = sfont.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
 RM       = rm -f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -25,5 +25,5 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-avantime.o: avantime.cpp
-	$(CPP) -c avantime.cpp -o avantime.o $(CXXFLAGS)
+SFont.o: SFont.c
+	$(CPP) -c SFont.c -o SFont.o $(CXXFLAGS)
