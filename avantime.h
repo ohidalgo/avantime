@@ -9,15 +9,7 @@
 #include "SDL_image.h"
 #include "SDL_mixer.h"
 
-int v_screenw = 800;
-int v_screenh = 600;
-int v_screenc = 16;
-int v_botonxpos = 100;
-int v_botonypos = 100;
-int v_frames = 25;
-int v_spritew = 256;
-int v_spriteh = 224;
-Mix_Music *cancion;
+
 int channel;
 int audio_rate = 22050;
 Uint16 audio_format = AUDIO_S16SYS;
@@ -30,9 +22,6 @@ SDL_Surface *fondo = NULL;
 SDL_Surface *boton = NULL;
 SDL_Rect destino;
 SDL_Event evento;
-bool salir = false;
-int limite_superior = 6;
-int limite_inferior = 4;
 int x, y;
 
 class Object {
