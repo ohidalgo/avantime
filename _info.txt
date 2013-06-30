@@ -1,0 +1,95 @@
+#Compiler Options
+-static-libstdc++ -static-libgcc -lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_mixer -mwindows -lSDL_ttf -lSDL_net
+
+#Setup or copy Libs and Include folder contects
+
+#Copy Dlls to windows/system
+
+
+When compiling my code I have been using: 
+g++ `sdl-config --cflags --libs` filename.cpp
+
+For code using add-on libraries I have been using: 
+g++ `sdl-config --cflags --libs` -lSDL_<libraryName> filename.cpp
+
+Simple Example for compiling an object file:
+
+cc -c `sdl-config --cflags` mysource.c
+
+Simple Example for compiling an object file:
+
+cc -o myprogram mysource.o `sdl-config --libs` -lSDL_ne
+
+Para llamar librerias en una carpeta
+#include <SDL/SDL.h>
+
+Para llamar librerias en la misma carpeta
+#include <./SDL.h>
+
+
+SDL_CONFIG = sdl-config
+DEFAULT_CFLAGS = $(shell $(SDL_CONFIG) --cflags)
+MORE_CFLAGS = -O2 
+
+CFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS)
+CXXFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS) -fno-exceptions -fno-rtti 
+
+LDLIBS = -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net
+ $(shell $(SDL_CONFIG) --libs) 
+
+all: holamundo_sdl
+holamundo_sdl: holamundo_sdl.c 
+
+clean:
+	rm -f *~
+	rm -f main.o main
+
+screen = SDL_SetVideoMode(1024,768,24,SDL_HWSURFACE|SDL_FULLSCREEN); //fullscreen
+
+40:   /* Dibujamos la imagen de fondo */
+41:   /* Como tiene 207 x 211 pixeles, la repetimos varias veces */
+42:   for (i=0; i<3; i++)
+43: 	for (j=0; j<3; j++) {
+44:       destino.x=207*i;
+45:       destino.y=211*j;
+46:       SDL_BlitSurface(fondo, NULL, screen, &destino);
+47: 	}
+
+    //codigo
+    int carga_imagenes(SDL_Surface *imagenes[IMAGENES]){
+        imagenes[BORRADOR]   = SDL_LoadBMP("borrador.bmp");
+        imagenes[CONSERJE]   = SDL_LoadBMP("conserje.bmp");
+        imagenes[ESQUINA_DA] = SDL_LoadBMP("esquina_da.bmp");
+        imagenes[ESQUINA_DD] = SDL_LoadBMP("esquina_dd.bmp");
+        imagenes[ESQUINA_IA] = SDL_LoadBMP("esquina_ia.bmp");
+        imagenes[ESQUINA_ID] = SDL_LoadBMP("esquina_id.bmp");
+        imagenes[PARED_H]    = SDL_LoadBMP("pared_h.bmp");
+        imagenes[PARED_V]    = SDL_LoadBMP("pared_v.bmp");
+        imagenes[PERSONAJE]  = SDL_LoadBMP("personaje.bmp");
+        imagenes[PROFESOR]   = SDL_LoadBMP("profesor.bmp");
+        imagenes[PUERTA]     = SDL_LoadBMP("puerta.bmp");
+        imagenes[SUELO]      = SDL_LoadBMP("suelo.bmp");
+        imagenes[TIZA]       = SDL_LoadBMP("Tiza.bmp");
+     
+        for(int i=0; i<=IMAGENES; i++){
+            if(imagenes[i]==NULL){
+                printf("No se puede cargar las imagenes: %s", SDL_GetError());
+                exit(1);
+            }
+        }
+        return 0;
+     
+    //codigo
+    }
+
+int 5random()
+{
+srand((unsigned)time(0));
+int random_integer;
+int lowest=1, highest=10;
+int range=(highest-lowest)+1;
+for(int index=0; index<20; index++){
+random_integer = lowest+int(range*rand()/(RAND_MAX + 1.0));
+cout << random_integer << endl;
+}
+}
